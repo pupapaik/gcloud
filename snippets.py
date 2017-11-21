@@ -39,7 +39,7 @@ def explicit(project):
 
     body = yaml.load(yaml_config)
 #    create_clusters = compute_client.projects().zones().clusters().create(projectId=project,zone='us-central1-a',body=body).execute()
-
+#    print(create_clusters)
 
     clusters = compute_client.projects().zones().clusters().list(projectId=project,zone='us-central1-a').execute()
     print(yaml.dump(clusters))
@@ -58,7 +58,9 @@ def explicit(project):
             cluster = i
 
     print (cluster)
-    
+
+    cluster = compute_client.projects().zones().clusters().get(projectId=project,zone='us-central1-a',clusterId=body['cluster']['name']).execute()
+
     # Get cluster section in KubeConfig
     kubeconfig_cluster_detail = {
        'server': "https://"+cluster["endpoint"],
