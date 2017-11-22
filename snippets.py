@@ -57,8 +57,6 @@ def explicit(project):
             global cluster
             cluster = i
 
-    print (cluster)
-
     cluster = compute_client.projects().zones().clusters().get(projectId=project,zone='us-central1-a',clusterId=body['cluster']['name']).execute()
 
     # Get cluster section in KubeConfig
